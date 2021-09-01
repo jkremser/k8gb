@@ -59,7 +59,9 @@ func main() {
 	// Initialize desired log or default log in case of configuration failed.
 	logging.Init(config)
 	log := logging.Logger()
-	log.Info().Str("version", version).Msg("k8gb:")
+	log.Info().
+		Str("version", version).
+		Msg("k8gb status")
 	if err != nil {
 		log.Err(err).Msg("can't resolve environment variables")
 		return
@@ -82,7 +84,7 @@ func main() {
 		return
 	}
 
-	log.Info().Msg("registering components.")
+	log.Info().Msg("registering components")
 
 	// Add external-dns DNSEndpoints resource
 	// https://github.com/operator-framework/operator-sdk/blob/master/doc/user-guide.md#adding-3rd-party-resources-to-your-operator
@@ -109,14 +111,14 @@ func main() {
 		return
 	}
 
-	log.Info().Msg("starting DNS provider")
+	log.Info().Msg("resolving DNS provider")
 	f, err = dns.NewDNSProviderFactory(reconciler.Client, *reconciler.Config)
 	if err != nil {
-		log.Err(err).Msgf("unable to create factory (%s)", err)
+		log.Err(err).Msg("unable to create factory")
 		return
 	}
 	reconciler.DNSProvider = f.Provider()
-	log.Info().Msgf("provider: %s", reconciler.DNSProvider)
+	log.Info().Str("provider", reconciler.DNSProvider.String()).Msg("started")
 
 	if err = reconciler.SetupWithManager(mgr); err != nil {
 		log.Err(err).Msg("unable to create controller Gslb")
