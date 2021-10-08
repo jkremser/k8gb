@@ -1,0 +1,124 @@
+apiVersion: v1alpha1
+kind: ClusterServiceVersion
+spec:
+  maintainers:
+    - email: dinar.valeev@absa.africa
+      name: Dinar Valeev
+    - email: jiri.kremser@gmail.com
+      name: Jiri Kremser
+    - email: kuritka@gmail.com
+      name: Michal Kuritka
+    - email: timofey.ilinykh@absa.africa
+      name: Timofey Ilinykh
+    - email: yury.tsarev@absa.africa
+      name: Yury Tsarev
+  maturity: alpha
+  minKubeVersion: 1.17.0
+  provider:
+    name: CNCF
+    url: https://github.com/k8gb-io/k8gb
+  links:
+    - name: K8gb
+      url: https://k8gb.io
+  description: |
+    **A cloud native Kubernetes Global Balancer**
+
+    A Global Service Load Balancing solution with a focus on having cloud native qualities and work natively in a Kubernetes context.
+
+    Key Differentiators:
+     - Load balancing is based on timeproof DNS protocol which is perfect for global scope and extremely reliable
+     - No dedicated management cluster and no single point of failure
+     - Kubernetes native application health checks utilizing status of Liveness and Readiness probes for load balancing decisions
+     - Configuration with a single Kubernetes CRD of `Gslb` kind
+
+    Operator needs to be configured by setting couple of environment variables. This can be done by modifying
+    the subscription yaml in the web ui or via kubectl. Here is an example of changing the `EDGE_DNS_ZONE`:
+
+    ```yaml
+    kind: Subscription
+      ...
+    spec:
+      ...
+      config:
+        env:
+        - name: CLUSTER_GEO_TAG
+          value: us
+        - name: EDGE_DNS_ZONE
+          value: mycloud.example.com
+          ...
+     ```
+     For more deployment variables see [helm code](https://github.com/k8gb-io/k8gb/blob/5beb6fc5244ef61c77fcbebb5243908ee77c615f/chart/k8gb/templates/operator.yaml#L53:L70).
+
+     For more information see [k8gb.io](https://k8gb.io).
+  install:
+    spec:
+      clusterPermissions:
+        - rules:
+            - apiGroups:
+                - ""
+              resources:
+                - endpoints
+                - services
+                - pods
+                - namespaces
+              verbs:
+                - list
+                - watch
+            - apiGroups:
+                - discovery.k8s.io
+              resources:
+                - endpointslices
+              verbs:
+                - list
+                - watch
+            - apiGroups:
+                - ""
+              resources:
+                - namespaces
+              verbs:
+                - list
+                - watch
+            - apiGroups:
+                - externaldns.k8s.io
+              resources:
+                - dnsendpoints
+              verbs:
+                - list
+                - watch
+          serviceAccountName: coredns
+        - rules:
+            - apiGroups:
+                - ""
+              resources:
+                - endpoints
+                - services
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+                - k8gb.absa.oss
+              resources:
+                - '*'
+                - gslbs
+              verbs:
+                - '*'
+            - apiGroups:
+                - networking.k8s.io
+              resources:
+                - ingresses
+              verbs:
+                - '*'
+            - apiGroups:
+                - externaldns.k8s.io
+              resources:
+                - dnsendpoints
+              verbs:
+                - '*'
+            - apiGroups:
+                - ""
+              resources:
+                - namespaces
+              verbs:
+                - list
+          serviceAccountName: k8gb
