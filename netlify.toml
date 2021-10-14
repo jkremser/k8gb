@@ -1,5 +1,5 @@
 [build]
-  command = "git remote -v && git fetch origin gh-pages && git checkout origin/gh-pages && make build"
+  command = "git fetch https://github.com/k8gb-io/k8gb gh-pages && git checkout gh-pages && make build"
   publish = "_site/"
 
 [context.deploy-preview.environment]
