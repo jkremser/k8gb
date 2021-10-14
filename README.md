@@ -16,6 +16,12 @@
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B162%2Fgithub.com%2FAbsaOSS%2Fk8gb.svg?type=shield)](https://app.fossa.com/projects/custom%2B162%2Fgithub.com%2FAbsaOSS%2Fk8gb?ref=badge_shield)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4866/badge)](https://bestpractices.coreinfrastructure.org/projects/4866)
 
+
+
+TEEEEEEEEEST
+
+
+
 A Global Service Load Balancing solution with a focus on having cloud native qualities and work natively in a Kubernetes context.
 
 Just a single Gslb CRD to enable the Global Load Balancing:
