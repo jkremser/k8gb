@@ -1,5 +1,5 @@
 [build]
-  command = "git checkout gh-pages && make build"
+  command = "git reset --hard origin/gh-pages && make build"
   publish = "_site/"
 
 [context.deploy-preview.environment]
