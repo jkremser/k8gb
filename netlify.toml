@@ -1,5 +1,5 @@
 [build]
-  command = "git fetch https://github.com/k8gb-io/k8gb gh-pages:gh-pages && git checkout gh-pages && make build"
+  command = "git fetch https://github.com/jkremser/k8gb gh-pages:gh-pages && git checkout gh-pages && make build"
   publish = "_site/"
 
 [context.deploy-preview.environment]
