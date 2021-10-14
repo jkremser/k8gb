@@ -27,7 +27,7 @@ endif
 #git checkout - {README.md,CONTRIBUTING.md,CHANGELOG.md,docs}
 .PHONY: build
 build:
-	git checkout - README && \
+	git checkout - README.md && \
 	mv CNAME EMANC && bundle exec jekyll build
 
 # Build and serve k8gb.io website locally with watch and livereload
