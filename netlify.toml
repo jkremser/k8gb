@@ -1,5 +1,5 @@
 [build]
-  command = "git remote add origin git@github.com:k8gb-io/k8gb.git && git fetch origin gh-pages && git checkout origin/gh-pages && make build"
+  command = "git remote -v && git fetch origin gh-pages && git checkout origin/gh-pages && make build"
   publish = "_site/"
 
 [context.deploy-preview.environment]
