@@ -41,11 +41,11 @@ spec:
     primaryGeoTag: eu-west-1 # Primary cluster geo tag
 ```
 
-Global load balancing, commonly referred to as GSLB (Global Server Load Balancing) solutions, has been typically the domain of proprietary network software and hardware vendors and installed and managed by siloed network teams.
+[Global load balancing](https://cloud.redhat.com/blog/global-load-balancer-approaches), commonly referred to as GSLB (Global Server Load Balancing) solutions, has been typically the domain of proprietary network software and hardware vendors and installed and managed by siloed network teams.
 
 k8gb is a completely open source, cloud native, global load balancing solution for Kubernetes.
 
-k8gb focuses on load balancing traffic across geographically dispersed Kubernetes clusters using multiple load balancing strategies to meet requirements such as region failover for high availability.
+k8gb focuses on load balancing traffic across geographically dispersed Kubernetes clusters using multiple load balancing [strategies](./docs/strategy.md) to meet requirements such as region failover for high availability.
 
 Global load balancing for any Kubernetes Service can now be enabled and managed by any operations or development teams in the same Kubernetes native way as any other custom resource.
 
@@ -70,7 +70,7 @@ This setup is adapted for local scenarios and works without external DNS provide
 
 Consult with [local playground](/docs/local.md) documentation to learn all the details of experimenting with local setup.
 
-Optionally, you can run `make-deploy-prometheus` and check the metrics on the test clusters (http://localhost:8080, http://localhost:8081).
+Optionally, you can run `make deploy-prometheus` and check the metrics on the test clusters (http://localhost:8080, http://localhost:8081).
 
 ## Motivation and Architecture
 
@@ -120,8 +120,8 @@ If your Kubernetes version or Ingress controller is not included in the table ab
 
 [//]: # (Table is generated with the help of https://www.tablesgenerator.com/markdown_tables#)
 
-| **Crossplane Community Day**<br><br>[![](https://img.youtube.com/vi/5l4Xf_Q8ybY/0.jpg)](https://www.youtube.com/watch?v=5l4Xf_Q8ybY "Crossplane Community Day Europe: Scaling Kubernetes Global Balancer with Crossplane") |  |
-|-|-|
+| **NS1 INS1GHTS**<br>[![](https://img.youtube.com/vi/T_4EiAqwevI/0.jpg)](https://www.youtube.com/watch?v=T_4EiAqwevI "INS1GHTS: Cloud Native Global Load Balancer for Kubernetes") | **Crossplane Community Day**<br>[![](https://img.youtube.com/vi/5l4Xf_Q8ybY/0.jpg)](https://www.youtube.com/watch?v=5l4Xf_Q8ybY "Crossplane Community Day Europe: Scaling Kubernetes Global Balancer with Crossplane") |
+|---|---|
 | **#29 DoK Community**<br>[![](https://img.youtube.com/vi/MluFlwPFZws/hqdefault.jpg)](https://www.youtube.com/watch?v=MluFlwPFZws "#29 DoK Community: How Absa Developed Cloud Native Global Load Balancer for Kubernetes") | **AWS Containers from the Couch show**<br>[![](https://img.youtube.com/vi/5pe3ezSnVI8/hqdefault.jpg)](https://www.youtube.com/watch?v=5pe3ezSnVI8 "AWS Containers from the Couch") |
 | **OpenShift Commons Briefings**<br>[![](https://img.youtube.com/vi/5DhO9C2NCrk/0.jpg)](https://www.youtube.com/watch?v=5DhO9C2NCrk "OpenShift Commons Briefings") | **Demo at Kubernetes SIG Multicluster**<br>[![](https://img.youtube.com/vi/jeUeRQM-ZyM/0.jpg)](https://www.youtube.com/watch?v=jeUeRQM-ZyM "Kubernetes SIG Multicluster") |
 
