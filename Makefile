@@ -24,9 +24,10 @@ ifneq ($(wildcard ./.env),)
 	export
 endif
 
+#git checkout - {README.md,CONTRIBUTING.md,CHANGELOG.md,docs}
 .PHONY: build
 build:
-	git checkout gh-pages && git checkout - {README.md,CONTRIBUTING.md,CHANGELOG.md,docs} && \
+	git checkout - README && \
 	mv CNAME EMANC && bundle exec jekyll build
 
 # Build and serve k8gb.io website locally with watch and livereload
