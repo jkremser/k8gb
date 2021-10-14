@@ -27,7 +27,7 @@ endif
 .PHONY: build
 build:
 	git checkout gh-pages && git checkout - {README.md,CONTRIBUTING.md,CHANGELOG.md,docs} && \
-	bundle exec jekyll build
+	mv CNAME EMANC && bundle exec jekyll build
 
 # Build and serve k8gb.io website locally with watch and livereload
 .PHONY: serve
