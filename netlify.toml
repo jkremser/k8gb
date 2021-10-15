@@ -1,6 +1,7 @@
 [build]
   command = "git config remote.origin.url || git remote add -f -t gh-pages origin https://github.com/jkremser/k8gb && git fetch origin gh-pages:gh-pages && git checkout gh-pages && make build"
   publish = "_site/"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF {README.md,CONTRIBUTING.md,CHANGELOG.md,docs/}"
 
 [context.deploy-preview.environment]
   ACCESS_TOKEN = "not so secret"
