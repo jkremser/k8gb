@@ -15,7 +15,7 @@ limitations under the License.
 package main
 
 import (
-	"os"
+ 	"os"
 
 	str "github.com/AbsaOSS/gopkg/strings"
 
@@ -50,6 +50,7 @@ func init() {
 }
 
 func main() {
+  // some change
 	var exitCode = 1
 	defer func() {
 		os.Exit(exitCode)
