@@ -2,6 +2,7 @@
 
 ## [v0.8.2](https://github.com/k8gb-io/k8gb/tree/v0.8.2) (2021-08-25)
 
+sdf
 [Full Changelog](https://github.com/k8gb-io/k8gb/compare/v0.8.1...v0.8.2)
 
 **Implemented enhancements:**
