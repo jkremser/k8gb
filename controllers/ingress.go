@@ -68,7 +68,7 @@ func (r *GslbReconciler) saveIngress(instance *k8gbv1beta1.Gslb, i *v1beta1.Ingr
 		err = r.Create(context.TODO(), i)
 
 		if err != nil {
-			// Creation failed
+			// Creation failed, yada
 			log.Err(err).
 				Str("namespace", i.Namespace).
 				Str("name", i.Name).
