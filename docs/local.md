@@ -18,7 +18,7 @@
 
 - Install **gnu-sed** if you don't have it. If you are on a Mac, install `gnu-sed` with Homebrew
     ```shell script
-    brew install gnu-sed
+    brew install gnu-sed # yada yada yada
     ```
 
 - [Install **Docker**](https://docs.docker.com/get-docker/)
