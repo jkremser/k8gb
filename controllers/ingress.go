@@ -60,7 +60,7 @@ func (r *GslbReconciler) saveIngress(instance *k8gbv1beta1.Gslb, i *v1beta1.Ingr
 	}, found)
 	if err != nil && errors.IsNotFound(err) {
 
-		// Create the service
+		// Create the service, yada yada
 		log.Info().
 			Str("namespace", i.Namespace).
 			Str("ingress", i.Name).
