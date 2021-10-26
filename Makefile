@@ -26,6 +26,7 @@ endif
 ###############################
 CLUSTER_GSLB1 = test-gslb1
 CLUSTER_GSLB2 = test-gslb2
+CLUSTER_GSLB3 = test-gslb3
 CLUSTER_GSLB_NETWORK = k3d-action-bridge-network
 GSLB_DOMAIN ?= cloud.example.com
 REPO = absaoss/k8gb
@@ -34,6 +35,7 @@ PODINFO_IMAGE_REPO ?= ghcr.io/stefanprodan/podinfo
 HELM_ARGS ?=
 K8GB_COREDNS_IP ?= kubectl get svc k8gb-coredns -n k8gb -o custom-columns='IP:spec.clusterIP' --no-headers
 CLUSTER_GSLB2_HELM_ARGS ?= --set k8gb.clusterGeoTag='us' --set k8gb.extGslbClustersGeoTags='eu' --set k8gb.hostAlias.hostnames='{gslb-ns-eu-cloud.example.com}'
+CLUSTER_GSLB3_HELM_ARGS ?= --set k8gb.clusterGeoTag='cz' --set k8gb.extGslbClustersGeoTags='eu\,us' --set k8gb.hostAlias.hostnames='{gslb-ns-eu-cloud.example.com}'
 LOG_FORMAT ?= simple
 LOG_LEVEL ?= debug
 CONTROLLER_GEN_VERSION  ?= v0.4.1
@@ -128,6 +130,24 @@ deploy-stable:
 	$(call list-running-pods,$(CLUSTER_GSLB1))
 	$(call list-running-pods,$(CLUSTER_GSLB2))
 
+comma:= ,
+.PHONY: add-third-cluster
+add-third-cluster:
+	@$(eval PREVIOUS_CONTEXT := $(shell kubectl config current-context))
+	$(call create-local-cluster,$(CLUSTER_GSLB3))
+	$(call deploy-local-cluster,$(CLUSTER_GSLB3),$(CLUSTER_GSLB1),$(VERSION),$(CLUSTER_GSLB3_HELM_ARGS),'k8gb/k8gb')
+
+	-@while [ -z $(shell kubectl get no k3d-$(CLUSTER_GSLB3)-agent-0 --no-headers -o custom-columns='IP:status.addresses[0].address') ] ; do sleep 1 && printf . ; done
+	$(eval 3RD_CLUSTER_IP := $(shell $(call get-host-alias-ip,$(PREVIOUS_CONTEXT),k3d-$(CLUSTER_GSLB3))))
+
+	$(call add-host-alias-ip,k3d-$(CLUSTER_GSLB1),cz,$(3RD_CLUSTER_IP))
+	$(call add-host-alias-ip,k3d-$(CLUSTER_GSLB2),cz,$(3RD_CLUSTER_IP))
+	$(call add-host-alias-ip,k3d-$(CLUSTER_GSLB3),us,$(shell $(call get-host-alias-ip,$(PREVIOUS_CONTEXT),k3d-$(CLUSTER_GSLB2))))
+
+	$(call update-ext-clusters-var,k3d-$(CLUSTER_GSLB1),'us$(comma)cz')
+	$(call update-ext-clusters-var,k3d-$(CLUSTER_GSLB2),'eu$(comma)cz')
+	kubectl config use-context $(PREVIOUS_CONTEXT)
+
 .PHONY: upgrade-candidate
 upgrade-candidate: ## Upgrade k8gb to the test version on existing clusters
 	@echo "\n$(YELLOW)import k8gb docker image to $(CYAN)$(CLUSTER_GSLB1), $(CLUSTER_GSLB2) $(NC)"
@@ -183,6 +203,7 @@ deploy-test-apps: ## Deploy testing workloads
 destroy-full-local-setup: ## Destroy full local multicluster setup
 	k3d cluster delete $(CLUSTER_GSLB1)
 	k3d cluster delete $(CLUSTER_GSLB2)
+	-k3d cluster delete $(CLUSTER_GSLB3)
 	docker network rm $(CLUSTER_GSLB_NETWORK)
 
 .PHONY: deploy-prometheus
@@ -453,6 +474,20 @@ define get-host-alias-ip
 	kubectl config use-context $2 > /dev/null && \
 	kubectl get nodes $2-agent-0 -o custom-columns='IP:status.addresses[0].address' --no-headers && \
 	kubectl config use-context $1 > /dev/null
+endef
+
+define add-host-alias-ip
+	@$(eval PREVIOUS_CONTEXT := $(shell kubectl config current-context))
+	kubectl config use-context $1 > /dev/null && \
+	kubectl patch deploy/k8gb -n k8gb --type=json -p='[{"op": "add", "path": "/spec/template/spec/hostAliases/-", "value": {"hostnames": ["gslb-ns-$2-cloud.example.com"], "ip":"$3"}}]' ; \
+	kubectl config use-context $(PREVIOUS_CONTEXT)
+endef
+
+define update-ext-clusters-var
+	@$(eval PREVIOUS_CONTEXT := $(shell kubectl config current-context))
+	kubectl config use-context $1 > /dev/null && \
+	kubectl set env deploy/k8gb -n k8gb EXT_GSLB_CLUSTERS_GEO_TAGS=$2 ; \
+	kubectl config use-context $(PREVIOUS_CONTEXT)
 endef
 
 define hit-testapp-host
