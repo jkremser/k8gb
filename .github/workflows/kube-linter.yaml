@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - master
-    paths-ignore:
+    paths:
       - 'chart/k8gb/**'
 
 jobs:
@@ -17,6 +17,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Scan repo
         id: kube-lint-repo
-        uses: stackrox/kube-linter-action@v1.0.2
+        uses: stackrox/kube-linter-action@v1.0.4
         with:
           directory: chart
+          version: 0.2.5
+      - name: Fail if no chart was found
+        run: |
+          grep --silent 'Warning: no valid objects found' kubelinter.log && exit 1 || exit 0
