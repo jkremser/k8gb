@@ -38,7 +38,7 @@ k8gb:
     # -- For more options consult https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#securitycontext-v1-core
     runAsNonRoot: true
     readOnlyRootFilesystem: true
-    allowPrivilegeEscalation: false
+    allowPrivilegeEscalation: true
     runAsUser: 1000
 
 externaldns:
