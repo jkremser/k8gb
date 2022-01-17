@@ -31,6 +31,7 @@ type TestSettings struct {
 	Cluster1        string
 	Cluster2        string
 	Cluster3        string
+	EdgeDNSCluster  string
 	PodinfoImage    string
 	ClustersNumber  int
 }

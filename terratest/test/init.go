@@ -46,6 +46,7 @@ func init() {
 		Cluster1:        env.GetEnvAsStringOrFallback("K8GB_CLUSTER1", "k3d-test-gslb1"),
 		Cluster2:        env.GetEnvAsStringOrFallback("K8GB_CLUSTER2", "k3d-test-gslb2"),
 		Cluster3:        env.GetEnvAsStringOrFallback("K8GB_CLUSTER3", "k3d-test-gslb3"),
+		EdgeDNSCluster:  env.GetEnvAsStringOrFallback("EDGE_DNS_CLUSTER", "k3d-edgedns"),
 		PodinfoImage:    env.GetEnvAsStringOrFallback("PODINFO_IMAGE_REPO", "ghcr.io/stefanprodan/podinfo"),
 		ClustersNumber:  clNum,
 	}
