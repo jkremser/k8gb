@@ -6,7 +6,7 @@ require (
 	github.com/AbsaOSS/env-binder v1.0.0
 	github.com/AbsaOSS/gopkg v0.1.3
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-logr/logr v1.2.0
+	github.com/go-logr/logr v1.2.3
 	github.com/golang/mock v1.6.0
 	github.com/infobloxopen/infoblox-go-client v1.1.1
 	github.com/miekg/dns v1.1.43
