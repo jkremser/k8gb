@@ -14,7 +14,7 @@ require (
 	github.com/rs/zerolog v1.21.0
 	github.com/stretchr/testify v1.7.0
 	k8s.io/api v0.23.3
-	k8s.io/apimachinery v0.23.3
+	k8s.io/apimachinery v0.23.6
 	k8s.io/client-go v0.23.3
 	sigs.k8s.io/controller-runtime v0.11.0
 	sigs.k8s.io/external-dns v0.10.3-0.20220321125120-cc9a60ecfa79
