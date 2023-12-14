@@ -87,5 +87,14 @@
       ],
       "autoReplaceStringTemplate": "  - sbom-file: https://github.com/{{{depName}}}/releases/download/v{{{newValue}}}/k8gb_{{{newValue}}}_linux_amd64.tar.gz.sbom.json"
     },
+    // update the files in k3d/ with the up-to-date k8s version
+    {
+      "fileMatch": ["^k3d/.*y[a]?ml.*$"],
+      "datasourceTemplate": "github-releases",
+      "matchStrings": [
+        "repo: (?<depName>.*)\n(\\s*)image: \"?.+:(?<currentValue>.*?)\"?\n",
+      ],
+      "extractVersionTemplate": "^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>\\+k3s)(?<build>\\d+)$",
+    },
   ],
 }
