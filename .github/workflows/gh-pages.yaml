@@ -33,7 +33,7 @@ jobs:
           git checkout ${GITHUB_REF##*/} CHANGELOG.md
           git checkout ${GITHUB_REF##*/} docs
       - name: Push to gh-pages
-        uses: EndBug/add-and-commit@38ab09c7b0a6ffc11c49e13617c7a439c7a4e011
+        uses: EndBug/add-and-commit@8190631d94913176d1e2cfced7634e15e4c58570
         with:
           author_name: ${{ github.actor }}
           author_email: ${{ github.actor }}@users.noreply.github.com
