@@ -81,7 +81,7 @@ coredns:
     # -- CoreDNS CRD plugin image
     repository: absaoss/k8s_crd
     # -- image tag
-    tag: v0.0.11
+    tag: v0.1.0
   # -- Creates serviceAccount for coredns
   serviceAccount:
     create: true
@@ -183,11 +183,11 @@ tracing:
     # -- OpenTelemetry collector into which the k8gb operator sends the spans. It can be further configured to send its data
     # to somewhere else using exporters (Jaeger for instance)
     repository: otel/opentelemetry-collector
-    tag: 0.57.2
+    tag: 0.112.0
     pullPolicy: Always
 
   jaegerImage:
     # -- if `tracing.deployJaeger==true` this image will be used in the deployment for Jaeger
     repository: jaegertracing/all-in-one
-    tag: 1.37.0
+    tag: 1.62.0
     pullPolicy: Always

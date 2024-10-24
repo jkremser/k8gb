@@ -6,23 +6,23 @@ require (
 	github.com/AbsaOSS/env-binder v1.0.1
 	github.com/AbsaOSS/gopkg v0.1.3
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-logr/logr v1.2.3
+	github.com/go-logr/logr v1.4.2
 	github.com/golang/mock v1.6.0
 	github.com/infobloxopen/infoblox-go-client v1.1.1
-	github.com/miekg/dns v1.1.52
-	github.com/prometheus/client_golang v1.14.0
-	github.com/rs/zerolog v1.21.0
-	github.com/stretchr/testify v1.8.0
-	go.opentelemetry.io/otel v1.10.0
-	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.10.0
-	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.7.0
-	go.opentelemetry.io/otel/sdk v1.10.0
-	go.opentelemetry.io/otel/trace v1.10.0
-	k8s.io/api v0.26.3
-	k8s.io/apimachinery v0.26.3
-	k8s.io/client-go v0.26.3
-	sigs.k8s.io/controller-runtime v0.14.5
-	sigs.k8s.io/external-dns v0.13.1
+	github.com/miekg/dns v1.1.62
+	github.com/prometheus/client_golang v1.20.5
+	github.com/rs/zerolog v1.33.0
+	github.com/stretchr/testify v1.9.0
+	go.opentelemetry.io/otel v1.31.0
+	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.31.0
+	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.31.0
+	go.opentelemetry.io/otel/sdk v1.31.0
+	go.opentelemetry.io/otel/trace v1.31.0
+	k8s.io/api v0.31.2
+	k8s.io/apimachinery v0.31.2
+	k8s.io/client-go v0.31.2
+	sigs.k8s.io/controller-runtime v0.19.1
+	sigs.k8s.io/external-dns v0.15.0
 )
 
 require (
